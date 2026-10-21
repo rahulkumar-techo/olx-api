@@ -30,7 +30,7 @@ func main() {
 		IdleTimeout:  time.Second * 60,
 	}
 
-	fmt.Println("Olx server is running on port 6000...")
+	fmt.Printf("Olx server is running on port %s...\n", cfg.Port)
 
 	if err := srv.ListenAndServe(); err != nil {
 		log.Fatalf("server failed: %v", err)

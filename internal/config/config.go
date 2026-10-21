@@ -13,20 +13,19 @@ type Config struct {
 }
 
 func MustLoad() Config {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	// Load .env for local development if available.
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, reading from system environment")
 	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		panic("Port is requried")
+		port = "8080"
 	}
 
 	env := os.Getenv("ENV")
 	if env == "" {
-		panic("env is requried")
-
+		env = "production"
 	}
 
 	return Config{
