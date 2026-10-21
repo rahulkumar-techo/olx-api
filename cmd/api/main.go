@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/rhaulkumar-techo/olx/internal/config"
 	"log"
 	"net/http"
 	"time"
 )
 
 func main() {
+	cfg := config.MustLoad()
 
 	// custom router
 	mux := http.NewServeMux()
@@ -21,7 +23,7 @@ func main() {
 
 	// server config
 	srv := http.Server{
-		Addr:         ":6000",
+		Addr:         ":" + cfg.Port,
 		Handler:      mux,
 		ReadTimeout:  time.Second * 10,
 		WriteTimeout: time.Second * 30,
