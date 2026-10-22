@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/rhaulkumar-techo/olx/internal/config"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/rhaulkumar-techo/olx/internal/config"
+	"github.com/rhaulkumar-techo/olx/internal/handlers"
 )
 
 func main() {
@@ -14,12 +16,7 @@ func main() {
 	// custom router
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", func(response http.ResponseWriter, request *http.Request) {
-
-		response.Header().Set("Content-Type", "application/json")
-		response.WriteHeader(http.StatusOK)
-		response.Write([]byte(`{"status":"running"}`))
-	})
+	mux.HandleFunc("GET /",handlers.Healthz)
 
 	// server config
 	srv := http.Server{
